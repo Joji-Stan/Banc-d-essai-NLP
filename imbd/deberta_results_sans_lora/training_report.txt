@@ -1,0 +1,23 @@
+
+# Rapport d'entraînement et d'évaluation
+
+## **Résultats**
+- **Accuracy** : 0.9412
+- **F1-score** : 0.9412
+- **Precision globale** : 0.9413
+- **Recall global** : 0.9411
+- **Loss finale** : 0.1846
+
+## **Hyperparamètres principaux**
+- **Epochs** : 1
+- **Batch (train/eval)** : 8 / 8
+- **Weight Decay** : 0.01
+
+## **Temps d'entraînement**
+- **Temps moyen par époque** : 709.3585 sec
+
+## **Empreinte carbone**
+- **CO₂ estimé** : 0.0080 kg
+
+## **Courbes d'apprentissage**
+`./results_withoutlora/learning_curves.png`

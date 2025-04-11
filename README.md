@@ -1,6 +1,6 @@
 ## 🧠 Stratégie d'entraînement des modèles
 
-Nous avons entraîné plusieurs modèles de classification sur trois jeux de données : **HateSpeech**, **IMDB**, et **OHSUMED**, en comparant les performances avec et sans l'utilisation de **LoRA (Low-Rank Adaptation)**.
+Nous avons entraîné plusieurs modèles de classification :  **DistillBert**, **ModernBert**, et **Deberta-v3-base**,sur trois jeux de données : **HateSpeech**, **IMDB**, et **OHSUMED**, en comparant les performances avec et sans l'utilisation de **LoRA (Low-Rank Adaptation)**.
 
 ### 📊 Séparation des données
 Chaque dataset a été divisé comme suit :
@@ -17,7 +17,7 @@ Les entraînements ont été réalisés avec les configurations suivantes :
 - **Weight Decay** : utilisé pour la régularisation
 - **Nombre d’époques** : déterminé pour chaque jeu de données en fonction de la convergence
 - **Gradient Accumulation Steps** : utilisé pour simuler de plus grands batchs
-- **Tokenizer** : `distilbert-base-uncased` (pour les modèles DistilBERT)
+- **Tokenizer** : `distilbert-base-uncased` (pour les modèles DistilBERT), `deberta-v3-base` (pour le modèle deberta-v3-base)
 
 ### 🔒 Fine-tuning sans LoRA
 Pour les versions **sans LoRA**, une approche de fine-tuning partiel a été utilisée :
@@ -60,3 +60,25 @@ Dans les versions **avec LoRA**, nous avons utilisé un entraînement avec adapt
 | Sans LoRA        | modern-bert              |              |                |               |             |           |             |                         |          |                  |                            |                             |                      |              |                    |                  |                |                   |          |          |
 | Avec LoRA        | deberta                  |              |                |               |             |           |             |                         |          |                  |                            |                             |                      |              |                    |                  |                |                   |          |          |
 | Sans LoRA        | deberta                  |              |                |               |             |           |             |                         |          |                  |                            |                             |                      |              |                    |                  |                |                   |          |          |
+
+# 🗂️ Tâche de Retrieval
+
+## 📌 Objectif
+Évaluer et comparer différents modèles de **sentence embedding** pour la tâche de retrieval de documents (recherche d'information) sur différents corpus :
+
+## modèles sentences embeddings 
+
+
+## 🗂️ Corpus
+- **Quora**
+
+**Fonctions principales** :
+- Création/sauvegarde/chargment embeddings
+- Similarité cosinus sur les embeddings
+- Utilisation de `pytrec_eval` pour l'évaluation
+
+## Métriques d'évaluation
+- nDCG@100 : Pertinence des résultats en tenant compte de leur position
+- MAP@100 : Précision moyenne sur les 100 premiers résultats
+
+## Résultats
