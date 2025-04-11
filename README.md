@@ -56,12 +56,18 @@ Dans les versions **avec LoRA**, nous avons utilisé un entraînement avec adapt
 |------------------|--------------------------|--------------|----------------|---------------|-------------|-----------|-------------|-------------------------|----------|------------------|----------------------------|-----------------------------|----------------------|--------------|--------------------|------------------|----------------|-------------------|----------|----------|
 | Avec LoRA        | distilbert-base-uncased  | 0.4727       | 0.4385         | 0.4402        | 0.4558      | 1.5091    | 3           | 8 / 8                   | 5e-05    | 0.01             | r=8, α=16, dropout=0.1     | distilbert-base-uncased    | 1312.6677            | 0.0147       | -                  | -                | -              | -                 | -        | T4       |
 | Sans LoRA        | distilbert-base-uncased  | 0.4702       | 0.4367         | 0.4348        | 0.4507      | 1.5054    | 3           | 8 / 8                   | 5e-05    | 0.01             | non utilisé                | distilbert-base-uncased    | 1229.2075            | 0.0184       | -                  | -                | -              | -                 | -        | T4       |
-| Avec LoRA        | modern-bert              |              |                |               |             |           |             |                         |          |                  |                            |                             |                      |              |                    |                  |                |                   |          |          |
-| Sans LoRA        | modern-bert              |              |                |               |             |           |             |                         |          |                  |                            |                             |                      |              |                    |                  |                |                   |          |          |
+| Avec LoRA        | modern-bert              | 0.2882       | 0.2251         | 0.2185        | 0.2322      | 2.441     | 3           | 8 / 8                   | 5e-05    | 0.05             | r=8, α=16, dropout=0.1     | modern-bert-base          | 2247.67              | 0.021        | 2                  | 2000             | LINEAR         | 1                 | 123      | T4       |
+| Sans LoRA        | modern-bert              | 0.3205       | 0.1615         | 0.6308        | 0.1685      | 2.3340    | 3           | 8 / 8                   | 5e-05    | 0.05             | non utilisé                | modern-bert-base          | 2205.67              | 0.0210       | 2                  | 2000             | LINEAR         | 1                 | 123      | T4       |
 | Avec LoRA        | deberta                  |              |                |               |             |           |             |                         |          |                  |                            |                             |                      |              |                    |                  |                |                   |          |          |
 | Sans LoRA        | deberta                  |              |                |               |             |           |             |                         |          |                  |                            |                             |                      |              |                    |                  |                |                   |          |          |
 
-# 🗂️ Tâche de Retrieval
+Les résultats obtenus par nos entraînements sont cohérents avec les ressources que nous avons pu trouver, par exemple cet [article d’Hugging Face](https://huggingface.co/blog/modernbert) qui présente des métriques pour les modèles DeBERTa et ModernBERT.
+
+Nous pouvons observer les différences entre nos évaluations et d'autres réalisées sur le dataset IMDb via cette page : [Papers with Code – Sentiment Analysis on IMDb](https://paperswithcode.com/sota/sentiment-analysis-on-imdb).
+
+De même, pour le dataset Ohsumed, des comparaisons sont possibles ici : [Papers with Code – Text Classification on Ohsumed](https://paperswithcode.com/sota/text-classification-on-ohsumed).
+
+🗂️ Tâche de Retrieval
 
 ## 📌 Objectif
 Évaluer et comparer différents modèles de **sentence embedding** pour la tâche de retrieval de documents (recherche d'information) sur différents corpus :
@@ -71,6 +77,7 @@ Dans les versions **avec LoRA**, nous avons utilisé un entraînement avec adapt
 
 ## 🗂️ Corpus
 - **Quora**
+- **NFCorpus**
 
 **Fonctions principales** :
 - Création/sauvegarde/chargment embeddings
@@ -82,3 +89,11 @@ Dans les versions **avec LoRA**, nous avons utilisé un entraînement avec adapt
 - MAP@100 : Précision moyenne sur les 100 premiers résultats
 
 ## Résultats
+| # | Modèle           | Quora nDCG@100 | Quora MAP@100 | NFCorpus nDCG@100 | NFCorpus MAP@100 |
+|---|------------------|----------------|---------------|-------------------|------------------|
+| 1 | gte-modernbert   | 0.8832         | 0.8354        | 0.2728            | 0.1361           |
+| 2 | distilbert-cos   | 0.8920         | 0.8477        | 0.2297            | 0.1084           |
+| 3 | deberta-st       | 0.3217         | 0.2696        | 0.0202            | 0.0024           |
+
+
+
